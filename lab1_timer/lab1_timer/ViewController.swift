@@ -1,42 +1,38 @@
 //
 //  ViewController.swift
-//  Lab1New2
+//  lab1_timer
 //
-//  Created by Youngmin Ko on 2019-01-16.
-//  Copyright © 2019 Youngmin Ko. All rights reserved.
+//  Created by Mason Ko on 2019-03-27.
+//  Copyright © 2019 Mason Ko. All rights reserved.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var t1: UITextField!
+    
+    @IBOutlet weak var lblDisplayTime: UILabel!
+    @IBOutlet weak var lblInfo: UILabel!
+    @IBOutlet weak var TF1: UITextField!
     @IBOutlet weak var btnSet: UIButton!
     @IBOutlet weak var btnStart: UIButton!
     @IBOutlet weak var btnStop: UIButton!
-    @IBOutlet weak var display: UILabel!
-    @IBOutlet weak var btnreset: UIButton!
-    @IBOutlet weak var set: UIButton!
-    @IBOutlet weak var info: UILabel!
+    @IBOutlet weak var btnReset: UIButton!
     
     var timer = Timer()
-    var seconds = 60
-    var minutes = 0
-    var hsec = 0;
-    var ifStop = false
+    var seconds: Int = 60
+    var minutes: Int = 0
+    var hsec: Int = 0
+    var ifStop: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("minutes: " , minutes)
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
     @IBAction func start(_ sender: Any) {
         if(ifStop == false)
         {
-            let result = Int(t1.text!)
-            seconds = result!*60
+            let result = Int(TF1.text!)
+            seconds = result! * 60
             print(seconds)
             runTimer()
         }
@@ -48,60 +44,62 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func set(_ sender: Any) {
-       if let r1 = Int(t1.text!)
-       {
-            if(r1 > 60 || r1 < 1)
+        if let r1 = Int(TF1.text!)
+        {
+            if(r1 > 60) || (r1 < 1)
             {
-                info.text = "The number must be between 1 and 60"
-                t1.text = ""
+                lblInfo.text = "The number must be between 1 ~ 60"
+                TF1.text = ""
                 timer.invalidate()
             }
             else
             {
-                info.text = "Number Set Press Start"
+                lblInfo.text = "Number Set! Press Start"
             }
         }
+        
     }
-    
+    @IBAction func stop(_ sender: Any) {
+        ifStop = true
+        hsec = seconds
+        seconds = 0
+    }
     @IBAction func reset(_ sender: Any) {
         timer.invalidate()
         ifStop = false
-        hsec = 0
         seconds = 60
         minutes = 0
-        t1.text = ""
-        display.text = "MM:SS"
-        info.text = "Enter Minutes:"
+        hsec = 0
+        TF1.text = ""
+        lblDisplayTime.text = "MM:SS"
+        lblInfo.text = "Enter Minutes"
     }
     
-    func runTimer() {
+    @objc func runTimer()
+    {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats: true)
     }
-    @IBAction func stop(_ sender: Any) {
-        hsec = seconds
-        seconds = 0
-        ifStop = true
-    }
     
-    @objc func updateimer(){
-        if seconds < 1 {
+    @objc func updateTimer()
+    {
+        if (seconds < 1)
+        {
             timer.invalidate()
-            //Send alert to indicate time's up.
+            // send alert to indicate time's up
         }
         else
         {
             seconds -= 1
-            display.text = timeString(time: TimeInterval(seconds))
-            //display.text = String(seconds)
-            //labelButton.setTitle(timeString(time: TimeInterval(seconds)), for: UIControlState.normal)
+            lblDisplayTime.text = timeString(time: TimeInterval(seconds))
         }
     }
     
-    func timeString(time:TimeInterval) -> String
+    @objc func timeString(time: TimeInterval) ->String
     {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         return String(format:"%02i:%02i", minutes, seconds)
     }
+    
 }
 
