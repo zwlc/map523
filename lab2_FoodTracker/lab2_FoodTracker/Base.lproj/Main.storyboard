@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JJT-hx-qwd">
-                                <rect key="frame" x="20" y="63.999999999999972" width="335" height="424.33333333333326"/>
+                                <rect key="frame" x="20" y="63.999999999999972" width="335" height="439.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoT-iF-hvf">
                                         <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="20.333333333333332"/>
@@ -40,11 +40,15 @@
                                             <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fyG-13-wMS"/>
                                         </connections>
                                     </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vgf-aS-I9j">
-                                        <rect key="frame" x="0.0" y="104.33333333333337" width="320" height="320"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="vgf-aS-I9j">
+                                        <rect key="frame" x="0.0" y="104.33333333333337" width="335" height="335"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="vgf-aS-I9j" secondAttribute="height" multiplier="1:1" id="n1T-iU-p6N"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7df-Fb-esI" appends="YES" id="iJN-XO-ekJ"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -53,6 +57,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="JJT-hx-qwd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5pd-2R-f94"/>
                             <constraint firstItem="JJT-hx-qwd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="UEJ-rW-aUU"/>
@@ -63,9 +68,15 @@
                     <connections>
                         <outlet property="mealNameLabel" destination="KoT-iF-hvf" id="L1p-Hr-R93"/>
                         <outlet property="nameTextField" destination="Enb-g6-7Yy" id="Jv2-7e-era"/>
+                        <outlet property="photoImageView" destination="vgf-aS-I9j" id="YpC-PW-9Ol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7df-Fb-esI">
+                    <connections>
+                        <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="lji-io-Ykh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="72.799999999999997" y="132.68365817091455"/>
         </scene>
@@ -116,6 +127,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="defaultPhoto" width="1080" height="1080"/>
         <image name="meal1" width="1080" height="1080"/>
     </resources>
 </document>
