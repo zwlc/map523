@@ -9,10 +9,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--historyView-->
         <scene sceneID="xrL-hj-xNL">
             <objects>
-                <controller id="yg3-BN-NSi" customClass="InterfaceController" customModule="Lab9and10_WatchKit_Extension">
+                <controller identifier="historyView" id="yg3-BN-NSi" customClass="InterfaceController" customModule="Lab9and10_WatchKit_Extension">
                     <items>
                         <button width="1" alignment="left" title="Show" id="HUx-mQ-9KB">
                             <connections>
@@ -26,16 +26,16 @@
                         <label width="136" alignment="left" text="5:" numberOfLines="2" id="skP-UD-fv0"/>
                     </items>
                     <connections>
-                        <outlet property="Fifth" destination="skP-UD-fv0" id="7Kt-kt-E84"/>
-                        <outlet property="Fourth" destination="hgd-OL-TVR" id="2FF-mk-SAo"/>
-                        <outlet property="Second" destination="NJj-0n-O1O" id="Vhf-hw-bYJ"/>
-                        <outlet property="Third" destination="DrG-fN-hEg" id="UMa-a7-D6e"/>
-                        <outlet property="first" destination="Itb-Qp-dhb" id="Gfh-2I-dg8"/>
-                        <outlet property="show" destination="HUx-mQ-9KB" id="GiO-9Z-Zan"/>
+                        <outlet property="btn_show" destination="HUx-mQ-9KB" id="GiO-9Z-Zan"/>
+                        <outlet property="lbl_fifth" destination="skP-UD-fv0" id="7Kt-kt-E84"/>
+                        <outlet property="lbl_first" destination="Itb-Qp-dhb" id="Gfh-2I-dg8"/>
+                        <outlet property="lbl_fourth" destination="hgd-OL-TVR" id="2FF-mk-SAo"/>
+                        <outlet property="lbl_second" destination="NJj-0n-O1O" id="Vhf-hw-bYJ"/>
+                        <outlet property="lbl_third" destination="DrG-fN-hEg" id="UMa-a7-D6e"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-90" y="345"/>
+            <point key="canvasLocation" x="250" y="172"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
@@ -66,16 +66,21 @@
                                     <action selector="delete" destination="AgC-eL-Hgc" id="HuV-Tf-DUf"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Menu Item" icon="info" id="H2l-63-YLY" userLabel="History">
+                                <connections>
+                                    <action selector="openHistory" destination="AgC-eL-Hgc" id="1tf-H5-Wae"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
-                        <outlet property="display" destination="oSj-w8-cDN" id="fKQ-LW-Apv"/>
-                        <outlet property="recordBtn" destination="aeM-dR-ELb" id="CVi-X1-EzG"/>
-                        <outlet property="stopBtn" destination="TYZ-Fn-JGj" id="NvV-xq-P22"/>
+                        <outlet property="btn_record" destination="aeM-dR-ELb" id="CVi-X1-EzG"/>
+                        <outlet property="btn_stop" destination="TYZ-Fn-JGj" id="NvV-xq-P22"/>
+                        <outlet property="lbl_display" destination="oSj-w8-cDN" id="fKQ-LW-Apv"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="-59" y="276"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -92,7 +97,7 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="643"/>
+            <point key="canvasLocation" x="59" y="713"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">

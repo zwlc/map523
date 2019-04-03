@@ -12,22 +12,30 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
-    @IBOutlet weak var recordBtn: WKInterfaceButton!
-    @IBOutlet weak var display: WKInterfaceLabel!
-    @IBOutlet weak var stopBtn: WKInterfaceButton!
     
-    @IBOutlet weak var show: WKInterfaceButton!
-    @IBOutlet weak var first: WKInterfaceLabel!
-    @IBOutlet weak var Second: WKInterfaceLabel!
-    @IBOutlet weak var Third: WKInterfaceLabel!
-    @IBOutlet weak var Fourth: WKInterfaceLabel!
-    @IBOutlet weak var Fifth: WKInterfaceLabel!
+    @IBOutlet weak var lbl_display: WKInterfaceLabel!
+    @IBOutlet weak var btn_record: WKInterfaceButton!
+    @IBOutlet weak var btn_stop: WKInterfaceButton!
+    
+    @IBOutlet weak var btn_show: WKInterfaceButton!
+    @IBOutlet weak var lbl_first: WKInterfaceLabel!
+    @IBOutlet weak var lbl_second: WKInterfaceLabel!
+    @IBOutlet weak var lbl_third: WKInterfaceLabel!
+    @IBOutlet weak var lbl_fourth: WKInterfaceLabel!
+    @IBOutlet weak var lbl_fifth: WKInterfaceLabel!
     
     
     var timer : Timer?
     var heartRate = Int.random(in: 80 ... 110)
     var session = [Int]()
     var savedHeartRate = [Int]()
+    
+    
+    @IBAction func openHistory() {
+        presentController(withName:"historyView", context: nil)
+        
+        print("open history")
+    }
     
     @IBAction func delete() {
         deleteValues()
@@ -46,13 +54,13 @@ class InterfaceController: WKInterfaceController {
     
     func updateValue()
     {
-        display.setText("\(heartRate)")
+        lbl_display.setText("\(heartRate)")
         heartRate = Int.random(in: 80 ... 110)
         savedHeartRate.append(heartRate)
     }
     
     @IBAction func stopAction() {
-        display.setText("Session Complete")
+        lbl_display.setText("Session Complete")
         timer?.invalidate()
         if(session.isEmpty)
         {
@@ -91,20 +99,20 @@ class InterfaceController: WKInterfaceController {
                 
                         if(foo == 0)
                         {
-                            first.setText("1: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")
+                            lbl_first.setText("1: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")
                         }
                         if(foo == 1)
                         {
-                            Second.setText("2: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                       }
+                            lbl_second.setText("2: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                       }
                         if(foo == 2)
                         {
-                            Third.setText("3: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                  }
+                            lbl_third.setText("3: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                  }
                         if(foo == 3)
                         {
-                            Fourth.setText("4: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                      }
+                            lbl_fourth.setText("4: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                      }
                         if(foo == 4)
                         {
-                            Fifth.setText("5: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                     }
+                            lbl_fifth.setText("5: Min:\(min ??  0), Max:\(max ?? 0), Avg:\(avg)")                     }
                 }
         }
     }
