@@ -9,7 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var lblGameStatus: UILabel!
+    
+    
+    
     var gameOver = false
     
     var turn = 1    //1 is O  2 is X
@@ -21,42 +25,57 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named:"bgi1.jpg")!)
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named:"\(randomImage())")!)
     }
-
-
+    
+    
     @IBAction func btnPressed(_ sender: AnyObject) {
         
-       if board[sender.tag - 1] == 0 && gameOver != true
-       {
-           if turn == 1
-           {
+        if board[sender.tag - 1] == 0 && gameOver != true
+        {
+            
+            print("bgi change")
+            if turn == 1
+            {
+                
                 sender.setImage(UIImage(named: "nought.png"), for: [])
                 board[sender.tag - 1] = 1
-            
+                
                 turn = 2
             }
-           else{
+            else{
+                
                 sender.setImage(UIImage(named: "cross.png"), for: [])
                 board[sender.tag - 1] = 2
-            
+                
                 turn = 1
             }
-        
-        for win_cond in winning_conditions{
             
-            if board[win_cond[0]] != 0 && board[win_cond[0]] == board[win_cond[1]] && board[win_cond[1]] == board[win_cond[2]]
-            {
-                print("Winning Case")
-                gameOver = true
+            for win_cond in winning_conditions{
+                
+                if board[win_cond[0]] != 0 && board[win_cond[0]] == board[win_cond[1]] && board[win_cond[1]] == board[win_cond[2]]
+                {
+                    print("Winning Case")
+                    gameOver = true
+                    lblGameStatus.text = "GAME END!"
+                }
             }
-        }
-        
-        
-        
-        
+            
+            
+//            self.view.backgroundColor = UIColor(patternImage: UIImage(named:String(randomImage()))!)
+            
             print(board)
         }
         
     }
+    
+    func randomImage() -> String {
+        var name: String = "bgi"
+        var randomNo = arc4random() % 10
+        return String(name + String(randomNo) + ".jpg")
+    }
+    
+    
 }
 
