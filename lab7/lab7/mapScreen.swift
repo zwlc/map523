@@ -21,19 +21,19 @@ class mapScreen: UIViewController {
     @IBOutlet weak var lbl_address: UILabel!
     
     let locationManager = CLLocationManager()
-    let regionInMeters: Double = 30000
+    let regionInMeters: Double = 1500
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
         
-        lbl_latitude.text = String(locationManager.location!.coordinate.latitude)
-        lbl_longitude.text = String(locationManager.location!.coordinate.longitude)
-        lbl_altitude.text = String(locationManager.location!.altitude)
-        lbl_course.text = String(locationManager.location!.course)
-        lbl_speed.text = String(locationManager.location!.speed)
+//        lbl_latitude.text = String(locationManager.location!.coordinate.latitude)
+//        lbl_longitude.text = String(locationManager.location!.coordinate.longitude)
+//        lbl_altitude.text = String(locationManager.location!.altitude)
+//        lbl_course.text = String(locationManager.location!.course)
+//        lbl_speed.text = String(locationManager.location!.speed)
         
-//        lbl_address.text = String(locationManager)
+        
         
     }
     
@@ -66,7 +66,7 @@ class mapScreen: UIViewController {
             centerViewOnUserLocation()
             locationManager.startUpdatingLocation()
             
-        
+            
         case .denied:
             // show alert instructing them how to turn on permissions
             break
@@ -94,7 +94,6 @@ class mapScreen: UIViewController {
 
 extension mapScreen: CLLocationManagerDelegate {
     
-    // to do
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -109,7 +108,31 @@ extension mapScreen: CLLocationManagerDelegate {
 
 extension mapScreen: MKMapViewDelegate {
     func mapView(_ mapView:MKMapView, regionDidChangeAnimated animated: Bool){
+        let center = getCenterLocation(for: mapView)
+        let geoCoder = CLGeocoder()
         
-        
+        geoCoder.reverseGeocodeLocation(center) { [weak self] (placemarks, error) in
+            guard let self = self else { return }
+            
+//            if let _ = error{
+//                // to do
+//                return
+//            }
+            
+            guard let placemark = placemarks?.first else {
+                // to do
+                return
+            }
+            let streetNo = String(placemark.subThoroughfare ?? " ")
+            let streetName = String(placemark.thoroughfare ?? " ")
+            
+            self.lbl_altitude.text = String(self.locationManager.location!.altitude)
+            self.lbl_latitude.text = String(self.locationManager.location!.coordinate.latitude)
+            self.lbl_longitude.text = String(self.locationManager.location!.coordinate.longitude)
+            self.lbl_altitude.text = String(self.locationManager.location!.altitude)
+            self.lbl_course.text = String(self.locationManager.location!.course)
+            self.lbl_speed.text = String(self.locationManager.location!.speed)
+            self.lbl_address.text = streetNo + " " + streetName
+        }
     }
 }
