@@ -9,10 +9,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--historyView-->
+        <!--historyList-->
         <scene sceneID="xrL-hj-xNL">
             <objects>
-                <controller identifier="historyView" id="yg3-BN-NSi" customClass="InterfaceController" customModule="Lab9and10_WatchKit_Extension">
+                <controller identifier="historyList" id="yg3-BN-NSi" customClass="InterfaceController" customModule="Lab9and10_WatchKit_Extension">
                     <items>
                         <button width="1" alignment="left" title="Show" id="HUx-mQ-9KB">
                             <connections>
@@ -47,7 +47,7 @@
                                 <action selector="stopAction" destination="AgC-eL-Hgc" id="MUn-Lw-vyk"/>
                             </connections>
                         </button>
-                        <label width="133" alignment="center" text="Heart Rate" textAlignment="center" id="oSj-w8-cDN"/>
+                        <label width="133" height="48" alignment="center" text="Waiting for HR" textAlignment="center" id="oSj-w8-cDN"/>
                         <button width="1" alignment="center" title="Record" id="aeM-dR-ELb">
                             <connections>
                                 <action selector="recordStart" destination="AgC-eL-Hgc" id="SlN-7C-HYc"/>

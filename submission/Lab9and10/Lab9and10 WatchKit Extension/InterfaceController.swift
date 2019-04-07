@@ -9,9 +9,8 @@
 import WatchKit
 import Foundation
 
-
-class InterfaceController: WKInterfaceController {
-    
+class InterfaceController: WKInterfaceController
+{
     
     @IBOutlet weak var lbl_display: WKInterfaceLabel!
     @IBOutlet weak var btn_record: WKInterfaceButton!
@@ -24,24 +23,23 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var lbl_fourth: WKInterfaceLabel!
     @IBOutlet weak var lbl_fifth: WKInterfaceLabel!
     
-    
-    var timer : Timer?
-    var heartRate = Int.random(in: 80 ... 110)
     var session = [Int]()
     var savedHeartRate = [Int]()
+    var heartRate = Int.random(in: 80 ... 110)
+    var timer : Timer?
     
-    
-    @IBAction func openHistory() {
-        presentController(withName:"historyView", context: nil)
-        
-        print("open history")
+    @IBAction func openHistory()
+    {
+        presentController(withName:"historyList", context: nil)
     }
     
-    @IBAction func delete() {
+    @IBAction func delete()
+    {
         deleteValues()
     }
     
-    @IBAction func showHandler() {
+    @IBAction func showHandler()
+    {
         printValues()
         findValues()
     }
@@ -59,7 +57,8 @@ class InterfaceController: WKInterfaceController {
         savedHeartRate.append(heartRate)
     }
     
-    @IBAction func stopAction() {
+    @IBAction func stopAction()
+    {
         lbl_display.setText("Session Complete")
         timer?.invalidate()
         if(session.isEmpty == true)
@@ -71,7 +70,6 @@ class InterfaceController: WKInterfaceController {
         {
             print("else")
             session.append(session.last!+1)
-            
         }
         
         UserDefaults.standard.set(savedHeartRate, forKey: "heartRate\(session[session.last!])")
@@ -119,7 +117,6 @@ class InterfaceController: WKInterfaceController {
             }
         }
     }
-    
     func deleteValues()
     {
         for tempVar in 0..<6
@@ -131,20 +128,19 @@ class InterfaceController: WKInterfaceController {
             }
         }
     }
-    
-    
-    override func awake(withContext context: Any?) {
+    override func awake(withContext context: Any?)
+    {
         super.awake(withContext: context)
         printValues()
         // Configure interface objects here.
     }
-    
-    override func willActivate() {
+    override func willActivate()
+    {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
-    
-    override func didDeactivate() {
+    override func didDeactivate()
+    {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
