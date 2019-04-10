@@ -11,44 +11,6 @@ import GameplayKit
 import CoreMotion // i don't know what is it but it seems like about physics. so i import it anyways
 import CoreData   // to save data
 
-//func +(left: CGPoint, right: CGPoint) -> CGPoint {
-//    return CGPoint(x: left.x + right.x, y: left.y + right.y)
-//}
-//
-//func -(left: CGPoint, right: CGPoint) -> CGPoint {
-//    return CGPoint(x: left.x - right.x, y: left.y - right.y)
-//}
-//
-//func *(point: CGPoint, scalar: CGFloat) -> CGPoint {
-//    return CGPoint(x: point.x * scalar, y: point.y * scalar)
-//}
-//
-//func /(point: CGPoint, scalar: CGFloat) -> CGPoint {
-//    return CGPoint(x: point.x / scalar, y: point.y / scalar)
-//}
-//
-//#if !(arch(x86_64) || arch(arm64))
-//func sqrt(a: CGFloat) -> CGFloat {
-//    return CGFloat(sqrtf(Float(a)))
-//}
-//#endif
-//
-//extension CGPoint {
-//    func length() -> CGFloat {
-//        return sqrt(x*x + y*y)
-//    }
-//
-//    func normalized() -> CGPoint {
-//        return self / length()
-//    }
-//}
-
-
-
-
-
-
-
 class GameScene: SKScene, SKPhysicsContactDelegate
 {
     var ballTimer: Timer!
@@ -66,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     let racketCategory  :UInt32 = 0x1 << 0
     let netCategory     :UInt32 = 0x1 << 2
     
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults.standard // to save data
     
     var touchStart: CGPoint?
     var startTime : TimeInterval?
@@ -82,20 +44,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         //defaults.synchronize()
         print("game starting")
         
+        // about resetting, removing, empty array
 //        allScore.removeAll()
+        
+        // about border start
+        let border = SKPhysicsBody(edgeLoopFrom: (view.scene?.frame)!)
+        border.friction = 0
+        self.physicsBody = border
+        // about border end
+        
         physicsWorld.contactDelegate = self
         
         backgroundColor = SKColor.darkGray
-        
-        
         
         addRacket()
         addScoreLabel()
         addLifeLabel()
         addNet()
 
-
-        
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         ballTimer = Timer.scheduledTimer(timeInterval: 0.50, target: self, selector: #selector(addBall), userInfo: nil, repeats: true)
     }
@@ -141,6 +107,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     @objc func addBall () {
         
         let ball = SKSpriteNode(imageNamed: "ball1")
+        
         // about animation start
         var ballRun : [SKTexture] = []
         for number in 1...2
@@ -157,28 +124,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let minY = -size.width / 2 + ball.size.width / 2
         let range = maxY - minY
         let ballY = maxY - CGFloat(arc4random_uniform(UInt32(range)))
+//        print(ballY)
         ball.position = CGPoint(x: ballY, y: size.height / 2 + ball.size.height / 2)
         // about random location ball spawn and drop end
 //        print(ball.position)
         
-        
-        
-        
         let action = SKAction.moveTo(y: -(self.size.height / 2), duration: 1.5)
         ball.run(SKAction.repeatForever(action))
-        
-        
-        //        let randomAlienPosition = GKRandomDistribution(lowestValue: 0, highestValue: 414)
-        //        let position = CGFloat(randomAlienPosition.nextInt())
-        //
-        //        alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height)
         
         ball.physicsBody = SKPhysicsBody(rectangleOf: ball.size)
         ball.physicsBody?.isDynamic = true
         ball.physicsBody?.affectedByGravity = false
         ball.physicsBody?.categoryBitMask = ballCategory
         ball.physicsBody?.contactTestBitMask = racketCategory | netCategory
-        ball.physicsBody?.collisionBitMask = 0
+        ball.physicsBody?.collisionBitMask = 1
         
         self.addChild(ball)
         var randomNumberForMove = CGFloat(arc4random_uniform(UInt32(range)))
