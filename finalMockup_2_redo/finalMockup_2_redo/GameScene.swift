@@ -38,6 +38,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         allScore = defaults.object(forKey: "allScore") as? [Int] ?? [Int]()
         
         print("Start Gaming")
+//        allScore.removeAll()
+        let border = SKPhysicsBody(edgeLoopFrom: (view.scene?.frame)!)
+        border.friction = 2
+        self.physicsBody = border
         
         physicsWorld.contactDelegate = self
         backgroundColor = SKColor.green
@@ -111,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let ballY = maxY - CGFloat(arc4random_uniform(UInt32(range)))
         ball.position = CGPoint(x: ballY, y: size.height / 2 + ball.size.height / 2)
         
-        let action = SKAction.moveTo(y: -(size.height)/2, duration: 1.5)
+        let action = SKAction.moveTo(y: -(self.size.height / 2), duration: 1.5)
         ball.run(SKAction.repeatForever(action))
         
         ball.physicsBody = SKPhysicsBody(rectangleOf: ball.size)
@@ -123,5 +127,106 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(ball)
         
+        var randomNumberForMove = CGFloat(arc4random_uniform(UInt32(range)))
+        var moveDown = SKAction.moveBy(x: randomNumberForMove, y: 0, duration: 3.3)
+        let mySeq = SKAction.sequence([moveDown, SKAction.removeFromParent()])
+        ball.run(mySeq)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if let location = touch?.location(in: self)
+        {
+            let theNodes = nodes(at: location)
+            for node in theNodes
+            {
+                if node.name == "play"
+                {
+                    score = 0
+                    life = 3
+                    node.removeFromParent()
+                    scene?.isPaused = false
+                    ballTimer = Timer.scheduledTimer(timeInterval: 0.50, target: self, selector: #selector(addBall), userInfo: nil, repeats: true)
+                    finalScore.removeFromParent()
+                    //                    allScore.removeAll()
+                }
+            }
+        }
+        touchStart = touches.first?.location(in: self)
+        startTime = touches.first?.timestamp
+        for touch: AnyObject in touches
+        {
+            racket.position.x = touch.location(in: self).x
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch: AnyObject in touches
+        {
+            racket.position.x = touch.location(in: self).x
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        scoreLabel.text = "Score: \(score)"
+        lifeLabel.text = "Life: \(life)"
+        if contact.bodyA.categoryBitMask == racketCategory && contact.bodyB.categoryBitMask == ballCategory
+        {
+            contact.bodyB.node?.removeFromParent()
+            score += 1
+        }
+        if contact.bodyA.categoryBitMask == netCategory && contact.bodyB.categoryBitMask == ballCategory
+        {
+            contact.bodyB.node?.removeFromParent()
+            if(life == 0)
+            {
+                gameOver()
+            }
+            life -= 1
+        }
+    }
+    
+    @objc func gameOver()
+    {
+        scene?.isPaused = true
+        ballTimer?.invalidate()
+        
+        let playButton = SKSpriteNode(imageNamed: "play")
+        playButton.position = CGPoint(x: 0, y: -200)
+        playButton.size = CGSize(width: 200, height: 200)
+        playButton.name = "play"
+        playButton.zPosition = 1
+        addChild(playButton)
+        
+        allScore.append(score)
+        defaults.set(allScore, forKey: "allScore")
+        print(defaults.object(forKey: "allScore") as? [Int] ?? [Int]())
+        displayScores()
+    }
+    
+    @objc func displayScores(){
+        var finalString = "ALL SCORES \n"
+        var p = 0
+        while p < allScore.count{
+            finalString.append(String(allScore[p]))
+            finalString.append(",")
+            p += 1
+        }
+        print(finalString)
+        finalScore = SKLabelNode(text: "\(finalString)")
+        finalScore.position = CGPoint(x:0,y:0)
+        finalScore.fontName = "AmericanTypewriter-Bold"
+        finalScore.fontColor = UIColor.white
+        finalScore.fontSize = 36
+        finalScore.numberOfLines = 10
+        finalScore.fontColor = UIColor.white
+        //        for index in allScore
+        //        {
+        ////            print("---")
+        ////            print(allScore[index])
+        ////            finalScore = SKLabelNode(text: "All Scores: \n \(allScore[index]) \n")
+        //            finalScore.text = "All Scores: \n \(allScore[index]) \n"
+        //        }
+        addChild(finalScore)
     }
 }

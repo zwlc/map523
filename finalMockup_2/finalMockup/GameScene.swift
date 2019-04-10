@@ -52,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let border = SKPhysicsBody(edgeLoopFrom: (view.scene?.frame)!)
         border.friction = 0
         self.physicsBody = border
-        // about border end
+        // about border end.
         
         physicsWorld.contactDelegate = self
         
