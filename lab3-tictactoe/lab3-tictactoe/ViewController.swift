@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func btnPressed(_ sender: AnyObject) {
-        
+        print(sender.tag)
         if board[sender.tag - 1] == 0 && gameOver != true
         {
             
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
             }
             
             for win_cond in winning_conditions{
-                
+//                print("asdf" + String(board[win_cond[0]]) + "asdf")
                 if board[win_cond[0]] != 0 && board[win_cond[0]] == board[win_cond[1]] && board[win_cond[1]] == board[win_cond[2]]
                 {
                     print("Winning Case")
