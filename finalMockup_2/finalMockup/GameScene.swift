@@ -18,10 +18,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var scoreLabel: SKLabelNode!
     var lifeLabel: SKLabelNode!
     var net: SKSpriteNode!
-    var allScore: [Int] = []
-    var finalScore: SKLabelNode!
     var bomb: SKSpriteNode!
     
+    var allScore: [Int] = []
+    var finalScore: SKLabelNode!
     var score : Int = 0
     var life = 3
     
@@ -33,10 +33,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     var touchStart: CGPoint?
     var startTime : TimeInterval?
-    let minSpeed:CGFloat = 10000
-    let maxSpeed:CGFloat = 50000
-    let minDistance:CGFloat = 25
-    let minDuration:TimeInterval = 0.1
+//    let minSpeed:CGFloat = 10000
+//    let maxSpeed:CGFloat = 50000
+//    let minDistance:CGFloat = 25
+//    let minDuration:TimeInterval = 0.1
     
     override func didMove(to view: SKView) {
         
@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         addNet()
         addBomb()
 
-        self.physicsWorld.gravity = CGVector(dx: 2.5, dy: 0)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         ballTimer = Timer.scheduledTimer(timeInterval: 0.50, target: self, selector: #selector(addBall), userInfo: nil, repeats: true)
     }
     
