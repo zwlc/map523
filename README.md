@@ -5,7 +5,7 @@
 ![Language](https://img.shields.io/badge/language-Swift%204.2%20and%20%2B-orange.svg)
 ![designedFor](https://img.shields.io/badge/designedFor-iPhone%2C%20AppleWatch-green.svg)
 
-## What's in directories?
+### What's in directories?
 |Name|Description|Note|
 |----|----|----|
 FinalProject|final project files|also supports iPad|
@@ -32,5 +32,3 @@ Final Project|Shooting Game|also supports iPad|
 |----|----|----|
 Lab 9||watchOS|
 |Lab 10||watchOS|
-
-
