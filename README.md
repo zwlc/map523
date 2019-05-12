@@ -6,7 +6,7 @@
 ![designedFor](https://img.shields.io/badge/designedFor-iPhone%2C%20AppleWatch-green.svg)
 
 ### What's in directories?
-|Name|Description|Note|
+|Dir Name|Description|Note|
 |----|----|----|
 FinalProject|final project files|also supports iPad|
 |InClassNoteByProf|code developed in class||
