@@ -10,9 +10,9 @@
 |----|----|----|
 FinalProject|final project files|also supports iPad|
 |InClassNoteByProf|code developed in class||
-LabInstructionByProf||
+LabInstructionByProf|Lab Instructions|
 |LabsSubmitted|finished labs||
-MidtermTest|||
+MidtermTest|Midterm Test||
 
 ### iPhone Apps
 |Name|Description|Note|
@@ -25,12 +25,12 @@ Lab 6||
 |Lab 7|||
 Lab 8||
 |Midterm|Shooting Game (Player Vs. Player)|Projectile, Gravity etc...|
-Final Project|Shooting Game|Also available in iPad|
+Final Project|Shooting Game|also supports iPad|
 
 ### Apple Watch Apps (watchOS)
 |Name|Description|Note|
 |----|----|----|
 Lab 9||watchOS|
-|Lab 10|||
+|Lab 10||watchOS|
 
 
