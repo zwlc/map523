@@ -9,17 +9,18 @@
 |----|----|----|
 Lab 1|iOS Timer App||
 |Lab 3|||
-|Lab 4|||
+Lab 4||
 |Lab 5|||
-|Lab 6|||
+Lab 6||
 |Lab 7|||
-|Lab 8|||
+Lab 8||
 |Midterm|Shooting Game (Player Vs. Player)|Projectile, Gravity etc...|
-|Final Project|Shooting Game|Also available in iPad|
+Final Project|Shooting Game|Also available in iPad|
 
 ### Apple Watch Apps (watchOS)
 |Name|Description|Note|
 |----|----|----|
-Lab 9 and Lab 10||watchOS|
+Lab 9||watchOS|
+|Lab 10|||
 
 
