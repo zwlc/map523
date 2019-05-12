@@ -24,7 +24,7 @@ Lab 4||
 Lab 6||
 |Lab 7|||
 Lab 8||
-|Midterm|Shooting Game (Player Vs. Player)|Projectile, Gravity etc...|
+|Midterm|Shooting Game (Player Vs. Player)|failed to implement every features needed|
 Final Project|Shooting Game|also supports iPad|
 
 ### Apple Watch Apps (watchOS)
