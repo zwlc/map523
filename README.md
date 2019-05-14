@@ -1,5 +1,6 @@
 # MAP523 (iOS Apps made in Swift)
 * most apps are made for iPhone
+* MAP523 Winter 2019 @ Seneca College
 
 ![Platform](https://img.shields.io/badge/Platform-iOS-silver.svg)
 ![Language](https://img.shields.io/badge/language-Swift%204.2%20and%20%2B-orange.svg)
